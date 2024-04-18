@@ -8,7 +8,7 @@
     </p>
     <ul class="categorias">
       <li v-for="categoria in categorias" :key="categoria.nome">
-        <CardCategoria  :categoria="categoria"/>
+        <CardCategoria  :categoria="categoria" @selecionar-ingrediente="$emit('selecionar-ingrediente', $event)"/>
       </li>
     </ul>
     <p class="paragrafo dica">

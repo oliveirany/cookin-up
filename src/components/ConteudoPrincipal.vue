@@ -1,27 +1,37 @@
 <template>
   <main class="conteudo-principal">
     <SuaLista :ingredientes="ingredientes"/>
-    <SelecionarIngredientes />
+    <SelecionarIngredientes @selecionar-ingrediente="validaIngredientes"/>
+    <BotaoPrincipal :texto="textoBotao"/>
   </main>
 </template>
 
 <script lang="ts">
 import SelecionarIngredientes from './SelecionarIngredientes.vue';
 import SuaLista from './SuaLista.vue';
+import BotaoPrincipal from './BotaoPrincipal.vue';
+
 
 export default {
   data() {
     return {
-      ingredientes: [
-        'Alho', 
-        'Manteiga', 
-        'Orégano'
-      ]
+      ingredientes: [] as string[],
+      textoBotao: "Buscar receitas!"
     }
   },
   components: {
     SelecionarIngredientes,
-    SuaLista
+    SuaLista,
+    BotaoPrincipal
+  },
+  methods: {
+    validaIngredientes(ingrediente: string) {
+      if (this.ingredientes.includes(ingrediente)) {
+        this.ingredientes = this.ingredientes.filter(i => i !== ingrediente);
+      } else {
+        this.ingredientes.push(ingrediente);
+      }
+    }
   }
 }
 </script>
